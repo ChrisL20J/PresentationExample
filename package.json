@@ -16,11 +16,14 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.47.6",
+    "@vueform/slider": "^2.1.6",
     "@vueuse/core": "^9.6.0",
     "@vueuse/head": "^1.0.22",
+    "chart.js": "^4.1.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
+    "vue-chartjs": "^5.2.0",
     "vue-demi": "^0.13.11",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"

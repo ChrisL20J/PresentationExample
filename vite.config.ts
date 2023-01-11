@@ -16,7 +16,6 @@ import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 import VueMacros from 'unplugin-vue-macros/vite'
-import HighchartsVue from 'highcharts-vue'
 
 export default defineConfig({
   resolve: {
