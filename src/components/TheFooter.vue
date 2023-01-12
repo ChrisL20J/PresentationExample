@@ -25,5 +25,9 @@ const toggleLocales = () => {
     <!-- <a class="icon-btn mx-2" rel="noreferrer" href="ChrisL20J" target="_blank" title="GitHub">
       <div i-carbon-logo-github />
     </a> -->
+
+    <RouterLink class="icon-btn mx-2" to="/">
+      ROC & AUC
+    </RouterLink>
   </nav>
 </template>
