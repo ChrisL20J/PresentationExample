@@ -1,0 +1,1 @@
+A web-based showcase of some basic concept of Computer Science and AI.
