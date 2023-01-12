@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
-import Slider from '@vueform/slider'
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import SliderBar from './SliderBar.vue'
+import jsonObj from './data.json'
 
+const dataList = jsonObj
 const threshold = reactive({ count: 0 })
 const thresholdData = [
   threshold.count, threshold.count, threshold.count, threshold.count, threshold.count,
@@ -50,61 +52,70 @@ const config = {
   options: {},
 }
 
-function createChart() {
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config,
-  )
-  console.log('Chart created')
-  console.log(threshold)
-}
-
 function chartUpdate() {
-//   myChart.data.datasets[1].data = thresholdData
-//   myChart.update('none')
+  console.log('check:', myChart.data)
+  // myChart.data.datasets[1].data = thresholdData
+  // myChart.update('none')
   console.log('Chart update')
   console.log(threshold)
 }
 
-onMounted(createChart)
+onMounted(() => {
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config,
+  )
+})
 
 watch(threshold, chartUpdate)
 </script>
 
 <template>
-  <h2>正例預測機率</h2>
+  <h2>AUC</h2>
   <div class="w-1000px">
-    <SliderBar />
+    <SliderBar @barValueChange="(i) => threshold.count = i" />
   </div>
 
-  <div class="bg-white h-500px w-1000px float-left ">
+  <div class="bg-white h-500px w-1000px float-left">
     <canvas id="myChart" />
   </div>
   <div class="bg-white float-left text-black">
     <table>
-      <thead>
-        <tr>
-          <th colspan="4">
-            閥值 <span class="text-red">{{ threshold.count }}</span>
-          </th>
-        </tr>
-      </thead>
+      <tr>
+        <th colspan="4">
+          閥值 <span class="text-red">{{ threshold.count }}</span>
+        </th>
+      </tr>
       <tbody>
         <tr>
           <td>資料點</td>
-          <td>標籤</td>
           <td>正例預測機率</td>
-          <td>預測結果</td>
           <td>標籤</td>
+          <td>預測結果</td>
           <td>混淆矩陣結果</td>
         </tr>
-        <tr>
-          <td>D1</td>
-          <td>0.98</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>TP</td>
+        <tr v-for="datas in dataList" :key="datas.dataPoint">
+          <td>{{ datas.dataPoint }}</td>
+          <td>{{ datas.probability }}</td>
+          <td>{{ datas.label }}</td>
+          <td v-if="threshold.count >= datas.probability" class="text-green-700">
+            1
+          </td>
+          <td v-else class="text-red">
+            0
+          </td>
+          <td v-if="datas.label === 1 && threshold.count >= datas.probability">
+            TP
+          </td>
+          <td v-else-if="datas.label === 0 && threshold.count >= datas.probability">
+            FP
+          </td>
+          <td v-else-if="datas.label === 1 && threshold.count < datas.probability">
+            FN
+          </td>
+          <td v-else-if="datas.label === 0 && threshold.count < datas.probability">
+            TN
+          </td>
         </tr>
       </tbody>
     </table>

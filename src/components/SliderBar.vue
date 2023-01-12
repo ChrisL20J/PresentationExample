@@ -1,15 +1,18 @@
 <script>
 import Slider from '@vueform/slider'
-import { ref } from 'vue'
+import { defineEmits, ref } from 'vue'
 
-const barValue = ref(0)
+const emit = defineEmits(['barValueChange'])
 
 export default {
   components: { Slider },
-  setup() {
+  props: {
+    barCount: Number,
+  },
+  setup(props, { emit }) {
     function barValueUpdate(counter) {
-      barValue.value = counter
-      console.log(barValue.value)
+      console.log(counter)
+      emit('barValueChange', counter)
     }
     return {
       barValueUpdate,
