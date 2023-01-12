@@ -71,7 +71,7 @@ watch(threshold, chartUpdate)
 </script>
 
 <template>
-  <h2>AUC</h2>
+  <h2>ROC & AUC</h2>
   <div class="w-1000px">
     <SliderBar @barValueChange="(i) => threshold.count = i" />
   </div>
@@ -79,7 +79,7 @@ watch(threshold, chartUpdate)
   <div class="bg-white h-500px w-1000px float-left">
     <canvas id="myChart" />
   </div>
-  <div class="bg-white float-left text-black">
+  <div class="bg-white float-left text-black ml-5">
     <table>
       <tr>
         <th colspan="4">
