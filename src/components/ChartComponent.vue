@@ -51,19 +51,19 @@ const config = {
 }
 
 function createChart() {
-  console.log('Chart created')
-  console.log(threshold)
   const myChart = new Chart(
     document.getElementById('myChart'),
     config,
   )
+  console.log('Chart created')
+  console.log(threshold)
 }
 
 function chartUpdate() {
+//   myChart.data.datasets[1].data = thresholdData
+//   myChart.update('none')
   console.log('Chart update')
   console.log(threshold)
-  myChart.data.datasets[1].data = thresholdData
-  myChart.update('none')
 }
 
 onMounted(createChart)
@@ -74,8 +74,7 @@ watch(threshold, chartUpdate)
 <template>
   <h2>正例預測機率</h2>
   <div class="w-1000px">
-    <!-- <Slider /> -->
-    <Slider v-model="threshold.count" />
+    <SliderBar />
   </div>
 
   <div class="bg-white h-500px w-1000px float-left ">
