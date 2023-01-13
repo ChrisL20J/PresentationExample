@@ -26,7 +26,7 @@ const toggleLocales = () => {
       <div i-carbon-logo-github />
     </a> -->
 
-    <RouterLink class="icon-btn mx-2" to="/">
+    <RouterLink class="icon-btn mx-2" to="/AUC">
       ROC & AUC
     </RouterLink>
   </nav>
