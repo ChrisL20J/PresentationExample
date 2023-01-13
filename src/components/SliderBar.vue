@@ -32,5 +32,5 @@ export default {
 </script>
 
 <template>
-  <Slider v-model="value" class="w-1000px" :format="format" :min="min" :max="max" :step="step" :lazy="lazy" @update="barValueUpdate(value)" />
+  <Slider v-model="value" :format="format" :min="min" :max="max" :step="step" :lazy="lazy" @update="barValueUpdate(value)" />
 </template>
