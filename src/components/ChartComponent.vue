@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import Slider from '@vueform/slider'
 import Chart from 'chart.js/auto'
 import { onMounted, reactive, ref } from 'vue'
-import SliderBar from './SliderBar.vue'
 import jsonObjConfusionMatrix from './dataConfusionMatrix.json'
 import jsonObjAUC from './dataAUC.json'
 
 const { t, locale } = useI18n()
 const dataListConfusionMatrix = jsonObjConfusionMatrix
 const dataListAUC = jsonObjAUC
+
+const sliderBarControl = reactive({ value: 0, format: { decimals: 2 }, min: 0, max: 1, step: -1, lazy: false })
 const threshold = ref(0)
 const thresholdForAUCChart = ref(1)
 const thresholdID = ref(0)
@@ -228,7 +230,8 @@ function updateChartLocale() {
 }
 
 onMounted(chartCreate)
-watch(threshold, () => {
+watch(sliderBarControl, () => {
+  threshold.value = sliderBarControl.value
   chartUpdate()
   checkCM()
 })
@@ -240,7 +243,7 @@ watch(locale, updateChartLocale)
     ROC & AUC
   </h2>
   <div class="my-6 mx-150">
-    <SliderBar @barValueChange="(i) => threshold = i" />
+    <Slider v-model="sliderBarControl.value" :format="sliderBarControl.format" :min="sliderBarControl.min" :max="sliderBarControl.max" :step="sliderBarControl.step" :lazy="sliderBarControl.lazy" />
   </div>
   <div class="flex justify-around">
     <div class="bg-white h-500px w-1000px">

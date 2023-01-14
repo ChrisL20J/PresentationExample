@@ -2,7 +2,8 @@ not-found: 見つかりませんでした
 button:
   back: 戻る
   toggle_dark: ダークモード切り替え
-  toggle_langs: 言語
+  toggle_langs: 言語  
+  home: ホーム
 AUC-page:
   chart:
     prediction: 予測結果

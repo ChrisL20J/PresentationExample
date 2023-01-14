@@ -1,15 +1,36 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
+import jsonObj from './home.json'
 
+const { locale } = useI18n()
+const introduction = reactive({ S1: '', S2: '', S3: '' })
+const introJson = jsonObj
+
+function introUpdate() {
+  introJson.forEach((item) => {
+    if (locale.value === item.lang) {
+      introduction.S1 = item.introduction[0]
+      introduction.S2 = item.introduction[1]
+      introduction.S3 = item.introduction[2]
+    }
+  })
+}
+
+onMounted(introUpdate)
+watch(locale, introUpdate)
 </script>
 
 <template>
   <main>
     <p>
-      A web-based showcase platform of some basic concept of Computer Science and AI.
+      <!-- A web-based showcase platform of some basic concept of Computer Science and AI. -->
+      {{ introduction.S1 }}
       <br>
-      Planing to add more content in the future.
+      <!-- Planing to add more content in the future. -->
+      {{ introduction.S2 }}
       <br>
-      Built from <a class="hover:bg-gray" href="https://github.com/antfu/vitesse" target="_blank">vitesse</a>, a template made by <a class="hover:bg-gray" href="https://github.com/antfu" target="_blank">antfu</a>.
+      <!-- Built from <a class="hover:bg-gray" href="https://github.com/antfu/vitesse" target="_blank">vitesse</a>, a template made by<a class="hover:bg-gray" href="https://github.com/antfu" target="_blank">antfu</a>. -->
+      <span v-html="introduction.S3" />
     </p>
   </main>
 </template>

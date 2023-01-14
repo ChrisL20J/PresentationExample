@@ -2,7 +2,8 @@ not-found: 未找到頁面
 button:
   back: 返回
   toggle_dark: 切換深色模式
-  toggle_langs: 語言
+  toggle_langs: 語言  
+  home: 首頁
 AUC-page:
   chart:
     prediction: 正例預測機率

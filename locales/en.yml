@@ -3,6 +3,7 @@ button:
   back: Back
   toggle_dark: Toggle dark mode
   toggle_langs: Languages
+  home: Home
 AUC-page:
   chart:
     prediction: Prediction

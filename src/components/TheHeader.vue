@@ -28,6 +28,10 @@ watch(targetLocale, () => {
       <div i="carbon-sun dark:carbon-moon" />
     </button>
 
+    <RouterLink class="icon-btn mx-2" rel="noreferrer" to="/" :title="t('button.home')">
+      <svg width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7Z" /></svg>
+    </RouterLink>
+
     <!-- <a class="icon-btn mx-2" :title="t('button.toggle_langs')" @click="toggleLocales()">
       <div i-carbon-language />
     </a> -->

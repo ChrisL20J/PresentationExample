@@ -1,0 +1,26 @@
+[
+    {
+        "lang": "en",
+        "introduction": [
+            "A web-based showcase platform of some basic concept related to AI",
+            "Planning to add more content in the future",
+            "Built from <a class=\"hover:bg-gray\" href=\"https://github.com/antfu/vitesse\" target=\"_blank\">vitesse</a>, a template made by <a class=\"hover:bg-gray\" href=\"https://github.com/antfu\" target=\"_blank\">antfu</a>"
+        ]
+    },
+    {
+        "lang": "ja",
+        "introduction": [
+            "AIに関連する基本的なコンセプトを紹介するプラットフォームです",
+            "今後もコンテンツの追加を予定",
+            "<a class=\"hover:bg-gray\" href=\"https://github.com/antfu\" target=\"_blank\">antfu</a> によって作成されたテンプレートである <a class=\"hover:bg-gray\" href=\"https://github.com/antfu/vitesse\" target=\"_blank\">vitesse</a> から構築されています"
+        ]
+    },
+    {
+        "lang": "zh-TW",
+        "introduction": [
+            "一個展示人工智慧相關基本概念的網頁",
+            "預計會逐步加入相關內容",
+            "本網頁使用由<a class=\"hover:bg-gray\" href=\"https://github.com/antfu\" target=\"_blank\">antfu</a>所製作的<a class=\"hover:bg-gray\" href=\"https://github.com/antfu/vitesse\" target=\"_blank\">vitesse</a>模板建構"
+        ]
+    }
+]
