@@ -393,6 +393,7 @@ watch(locale, updateChartLocale)
 <style>
 table,
 thead,
+th,
 td {
     border: 1px solid #333;
     border-collapse: separate;
