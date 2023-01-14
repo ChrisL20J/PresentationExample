@@ -1,3 +1,23 @@
 not-found: 見つかりませんでした
 button:
   back: 戻る
+  toggle_dark: ダークモード切り替え
+  toggle_langs: 言語
+AUC-page:
+  chart:
+    prediction: 予測結果
+    threshold: 閾値
+    ROC: ROC曲線
+    TPR: 真陽性率
+    FPR: 偽陽性率
+  confusion-matrix-form:
+    data-point: データ
+    label: 実際クラス
+    result: 予測クラス
+    condition: 混同行列結果
+    confusion-matrix: 混同行列
+    current-threshold: 現在の閾値
+    previous-threshold: 前の閾值
+    next-threshold: 次の閾值
+    x-axis: 縦軸
+    y-axis: 横軸

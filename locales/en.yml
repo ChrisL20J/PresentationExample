@@ -1,3 +1,23 @@
 not-found: Not found
 button:
-  back: 返回
+  back: Back
+  toggle_dark: Toggle dark mode
+  toggle_langs: Languages
+AUC-page:
+  chart:
+    prediction: Prediction
+    threshold: Threshold
+    ROC: ROC curve
+    TPR: True Positive Rate
+    FPR: False Positive Rate
+  confusion-matrix-form:
+    data-point: Data
+    label: Label
+    result: Classification result
+    condition: Output of confusion matrix
+    confusion-matrix: Confusion matrix
+    current-threshold: Current threshold
+    previous-threshold: Previous threshold
+    next-threshold: Next threshold
+    x-axis: X-axis
+    y-axis: y-axis

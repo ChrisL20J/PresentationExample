@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import Slider from '@vueform/slider'
 import { defineEmits, ref } from 'vue'
 

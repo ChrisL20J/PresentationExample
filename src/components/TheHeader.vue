@@ -1,20 +1,30 @@
 <script setup lang="ts">
-const { t, availableLocales, locale } = useI18n()
+const { t, locale } = useI18n()
 
-const toggleLocales = () => {
-  // change to some real logic
-  const locales = availableLocales
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
-}
+const targetLocale = ref('')
+
+watch(targetLocale, () => {
+  locale.value = targetLocale.value
+})
 </script>
 
 <template>
   <nav text-xl mt-6>
-    <!-- <RouterLink class="icon-btn mx-2" to="/" :title="t('button.home')">
-      <div i-carbon-campsite />
-    </RouterLink> -->
-
-    <button class="icon-btn mx-2 !outline-none" @click="toggleDark()">
+    <select v-model="targetLocale">
+      <option disabled value="">
+        {{ t('button.toggle_langs') }}
+      </option>
+      <option value="en">
+        English
+      </option>
+      <option value="ja">
+        日本語
+      </option>
+      <option value="zh-TW">
+        中文
+      </option>
+    </select>
+    <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
       <div i="carbon-sun dark:carbon-moon" />
     </button>
 
@@ -26,7 +36,7 @@ const toggleLocales = () => {
       <div i-carbon-logo-github />
     </a> -->
 
-    <RouterLink class="icon-btn mx-2" to="/AUC">
+    <RouterLink class="icon-btn mx-2 mx-5" to="/AUC">
       ROC & AUC
     </RouterLink>
   </nav>

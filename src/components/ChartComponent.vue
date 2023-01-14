@@ -5,12 +5,15 @@ import SliderBar from './SliderBar.vue'
 import jsonObjConfusionMatrix from './dataConfusionMatrix.json'
 import jsonObjAUC from './dataAUC.json'
 
+const { t, locale } = useI18n()
 const dataListConfusionMatrix = jsonObjConfusionMatrix
 const dataListAUC = jsonObjAUC
 const threshold = ref(0)
 const thresholdForAUCChart = ref(1)
 const thresholdID = ref(0)
-const confusionMatrix = reactive({ TP: 0, FP: 0, TN: 0, FN: 0, FPP: 0, TPP: 0 })
+const confusionMatrix = reactive({ TP: 5, FP: 10, TN: 0, FN: 0 })
+const confusionMatrixROC = reactive({ TP: 0, FP: 0, TN: 0, FN: 0, FPR: 0, TPR: 0 })
+
 const labels = [
   'D1',
   'D2',
@@ -32,21 +35,21 @@ const labels = [
 const dataConfusionMatrix = {
   labels,
   datasets: [{
-    label: '正例預測機率',
+    label: 'Prediction',
     backgroundColor: 'rgb(52, 103, 235)',
     borderColor: 'rgb(0, 0, 0)',
     pointRadius: 7,
     data: [0.98, 0.9, 0.85, 0.81, 0.8, 0.78, 0.75, 0.69, 0.62, 0.6, 0.58, 0.51, 0.44, 0.37, 0.29],
   },
   {
-    label: '閥值',
+    label: 'Threshold',
     borderColor: 'rgb(0, 0, 0)',
     data: [
       threshold.value, threshold.value, threshold.value, threshold.value, threshold.value,
       threshold.value, threshold.value, threshold.value, threshold.value, threshold.value,
       threshold.value, threshold.value, threshold.value, threshold.value, threshold.value,
     ],
-    pointStyle: true,
+    pointStyle: false,
   },
   ],
 }
@@ -67,6 +70,22 @@ const configConfusionMatrix = {
     scales: {
       y: {
         min: 0,
+        title: {
+          display: true,
+          text: 'Prediction',
+          font: {
+            size: 20,
+          },
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Data',
+          font: {
+            size: 20,
+          },
+        },
       },
     },
   },
@@ -74,7 +93,7 @@ const configConfusionMatrix = {
 
 const dataAUC = {
   datasets: [{
-    label: 'ROC曲線',
+    label: 'ROC curve',
     backgroundColor: 'rgb(5, 125, 63)',
     borderColor: 'rgb(5, 125, 63)',
     pointRadius: 7,
@@ -101,11 +120,25 @@ const configAUC = {
       y: {
         min: 0,
         max: 1,
+        title: {
+          display: true,
+          text: 'True Positive Rate',
+          font: {
+            size: 20,
+          },
+        },
       },
       xAxis: {
         type: 'linear',
         min: 0,
         max: 1,
+        title: {
+          display: true,
+          text: 'False Positive Rate',
+          font: {
+            size: 20,
+          },
+        },
       },
     },
   },
@@ -116,12 +149,12 @@ let chartAUC = Chart
 
 function getAUCUpdate() {
   thresholdForAUCChart.value = dataListAUC[thresholdID.value].threshold
-  confusionMatrix.TP = dataListAUC[thresholdID.value].ConfusionMatrix.TP
-  confusionMatrix.FP = dataListAUC[thresholdID.value].ConfusionMatrix.FP
-  confusionMatrix.TN = dataListAUC[thresholdID.value].ConfusionMatrix.TN
-  confusionMatrix.FN = dataListAUC[thresholdID.value].ConfusionMatrix.FN
-  confusionMatrix.FPP = dataListAUC[thresholdID.value].FPP
-  confusionMatrix.TPP = dataListAUC[thresholdID.value].TPP
+  confusionMatrixROC.TP = dataListAUC[thresholdID.value].ConfusionMatrix.TP
+  confusionMatrixROC.FP = dataListAUC[thresholdID.value].ConfusionMatrix.FP
+  confusionMatrixROC.TN = dataListAUC[thresholdID.value].ConfusionMatrix.TN
+  confusionMatrixROC.FN = dataListAUC[thresholdID.value].ConfusionMatrix.FN
+  confusionMatrixROC.FPR = dataListAUC[thresholdID.value].FPR
+  confusionMatrixROC.TPR = dataListAUC[thresholdID.value].TPR
 }
 
 function chartCreate() {
@@ -162,16 +195,44 @@ function nextThresholdID() {
     thresholdID.value++
     getAUCUpdate()
     chartAUC.data.datasets.forEach((dataset) => {
-      dataset.data.push({ x: dataListAUC[thresholdID.value].FPP, y: dataListAUC[thresholdID.value].TPP })
+      dataset.data.push({ x: dataListAUC[thresholdID.value].FPR, y: dataListAUC[thresholdID.value].TPR })
     })
     chartAUC.update('none')
-    console.log({ x: dataListAUC[thresholdID.value].FPP, y: dataListAUC[thresholdID.value].TPP })
+    console.log({ x: dataListAUC[thresholdID.value].FPR, y: dataListAUC[thresholdID.value].TPR })
     console.log(chartAUC.data.datasets)
   }
 }
 
+function checkCM() {
+  dataListAUC.forEach((data, index) => {
+    if (threshold.value === data.threshold) {
+      confusionMatrix.TP = data.ConfusionMatrix.TP
+      confusionMatrix.FP = data.ConfusionMatrix.FP
+      confusionMatrix.TN = data.ConfusionMatrix.TN
+      confusionMatrix.FN = data.ConfusionMatrix.FN
+    }
+  })
+}
+
+function updateChartLocale() {
+  chartConfusionMatrix.data.datasets[0].label = t('AUC-page.chart.prediction')
+  chartConfusionMatrix.data.datasets[1].label = t('AUC-page.chart.threshold')
+  chartConfusionMatrix.options.scales.y.title.text = t('AUC-page.confusion-matrix-form.data-point')
+  chartConfusionMatrix.options.scales.x.title.text = t('AUC-page.chart.threshold')
+  chartConfusionMatrix.update('none')
+
+  chartAUC.data.datasets[0].label = t('AUC-page.chart.ROC')
+  chartAUC.options.scales.y.title.text = t('AUC-page.chart.TPR')
+  chartAUC.options.scales.xAxis.title.text = t('AUC-page.chart.FPR')
+  chartAUC.update('none')
+}
+
 onMounted(chartCreate)
-watch(threshold, chartUpdate)
+watch(threshold, () => {
+  chartUpdate()
+  checkCM()
+})
+watch(locale, updateChartLocale)
 </script>
 
 <template>
@@ -190,21 +251,21 @@ watch(threshold, chartUpdate)
       <table>
         <tr>
           <th colspan="5">
-            閥值:<span class="text-red">{{ threshold }}</span>
+            {{ t('AUC-page.chart.threshold') }}:<span class="text-red">{{ threshold }}</span>
           </th>
         </tr>
         <tbody>
           <tr>
-            <td>資料點</td>
-            <td>正例預測機率</td>
-            <td>標籤</td>
-            <td>預測結果</td>
-            <td>混淆矩陣結果</td>
+            <td>{{ t('AUC-page.confusion-matrix-form.data-point') }}</td>
+            <td>{{ t('AUC-page.confusion-matrix-form.label') }}</td>
+            <td>{{ t('AUC-page.chart.prediction') }}</td>
+            <td>{{ t('AUC-page.confusion-matrix-form.result') }}</td>
+            <td>{{ t('AUC-page.confusion-matrix-form.condition') }}</td>
           </tr>
           <tr v-for="datas in dataListConfusionMatrix" :key="datas.dataPoint">
             <td>{{ datas.dataPoint }}</td>
-            <td>{{ datas.probability }}</td>
             <td>{{ datas.label }}</td>
+            <td>{{ datas.probability }}</td>
             <td v-if="threshold <= datas.probability" class="text-green-700">
               1
             </td>
@@ -227,46 +288,71 @@ watch(threshold, chartUpdate)
         </tbody>
       </table>
     </div>
-  </div>
-
-  <div class="flex justify-center">
-    <div class="text-black mr-6">
-      <table class="bg-white ">
+    <div>
+      <table class="bg-white">
+        <tr>
+          <th colspan="2">
+            {{ t('AUC-page.confusion-matrix-form.confusion-matrix') }}
+          </th>
+        </tr>
         <tr>
           <td class="p-5">
             TP:{{ confusionMatrix.TP }}
           </td>
           <td class="p-5">
-            FP:{{ confusionMatrix.FP }}
+            FN:{{ confusionMatrix.FN }}
           </td>
         </tr>
         <tr>
           <td class="p-5">
-            TN:{{ confusionMatrix.TN }}
+            FP:{{ confusionMatrix.FP }}
           </td>
           <td class="p-5">
-            FN:{{ confusionMatrix.FN }}
+            TN:{{ confusionMatrix.TN }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="flex justify-center my-6">
+    <div class="text-black mr-6">
+      <table class="bg-white">
+        <tr>
+          <td class="p-5">
+            TP:{{ confusionMatrixROC.TP }}
+          </td>
+          <td class="p-5">
+            FN:{{ confusionMatrixROC.FN }}
+          </td>
+        </tr>
+        <tr>
+          <td class="p-5">
+            FP:{{ confusionMatrixROC.FP }}
+          </td>
+          <td class="p-5">
+            TN:{{ confusionMatrixROC.TN }}
           </td>
         </tr>
         <th colspan="2">
-          <tr>當前閥值 : {{ thresholdForAUCChart }}</tr>
+          <tr>{{ t('AUC-page.confusion-matrix-form.current-threshold') }} : {{ thresholdForAUCChart }}</tr>
         </th>
       </table>
       <button class="btn" @click="previousThresholdID">
-        上一個閥值
+        {{ t('AUC-page.confusion-matrix-form.previous-threshold') }}
       </button><br>
       <button class="btn" @click="nextThresholdID">
-        下一個閥值
+        {{ t('AUC-page.confusion-matrix-form.next-threshold') }}
       </button>
       <table class="bg-white ">
         <tr>
           <td class="p-5">
-            X軸(偽陽性率) : {{ confusionMatrix.FPP }}
+            {{ t('AUC-page.confusion-matrix-form.x-axis') }}({{ t('AUC-page.chart.FPR') }}) : {{ confusionMatrixROC.FPR }}
           </td>
         </tr>
         <tr>
           <td class="p-5">
-            Y軸(真陽性率) : {{ confusionMatrix.TPP }}
+            {{ t('AUC-page.confusion-matrix-form.y-axis') }}({{ t('AUC-page.chart.TPR') }}) : {{ confusionMatrixROC.TPR }}
           </td>
         </tr>
       </table>

@@ -1,0 +1,25 @@
+not-found: 未找到頁面
+button:
+  back: 返回
+  toggle_dark: 切換深色模式
+  toggle_langs: 語言
+AUC-page:
+  chart:
+    prediction: 正例預測機率
+    threshold: 閾值
+    ROC: ROC曲線
+    TPR: 真陽性率
+    FPR: 偽陽性率
+  confusion-matrix-form:
+    data-point: 資料點
+    label: 標籤
+    result: 預測結果
+    condition: 混淆矩陣分類
+    confusion-matrix: 混淆矩陣
+    current-threshold: 當前閾值
+    previous-threshold: 上一個閾值
+    next-threshold: 下一個閾值
+    x-axis: X軸
+    y-axis: y軸
+  
+
