@@ -11,8 +11,8 @@
         "lang": "ja",
         "introduction": [
             "AIに関連する基本的なコンセプトを紹介するプラットフォームです",
-            "今後もコンテンツの追加を予定",
-            "<a class=\"hover:bg-gray\" href=\"https://github.com/antfu\" target=\"_blank\">antfu</a> によって作成されたテンプレートである <a class=\"hover:bg-gray\" href=\"https://github.com/antfu/vitesse\" target=\"_blank\">vitesse</a> から構築されています"
+            "今後、コンテンツを増やしていく予定です",
+            "<a class=\"hover:bg-gray\" href=\"https://github.com/antfu\" target=\"_blank\">antfu</a> によって作成されたテンプレート、 <a class=\"hover:bg-gray\" href=\"https://github.com/antfu/vitesse\" target=\"_blank\">vitesse</a> で構築されています"
         ]
     },
     {

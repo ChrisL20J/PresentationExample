@@ -206,14 +206,31 @@ function nextThresholdID() {
 }
 
 function checkCM() {
-  dataListAUC.forEach((data, index) => {
-    if (threshold.value === data.threshold) {
-      confusionMatrix.TP = data.ConfusionMatrix.TP
-      confusionMatrix.FP = data.ConfusionMatrix.FP
-      confusionMatrix.TN = data.ConfusionMatrix.TN
-      confusionMatrix.FN = data.ConfusionMatrix.FN
+  dataListAUC.some((item, index) => {
+    if (threshold.value > item.threshold) {
+      confusionMatrix.TP = dataListAUC[index - 1].ConfusionMatrix.TP
+      confusionMatrix.FP = dataListAUC[index - 1].ConfusionMatrix.FP
+      confusionMatrix.TN = dataListAUC[index - 1].ConfusionMatrix.TN
+      confusionMatrix.FN = dataListAUC[index - 1].ConfusionMatrix.FN
+      console.log(threshold.value, item.ConfusionMatrix)
+      return true
+    }
+    else if (threshold.value <= 0.29) {
+      confusionMatrix.TP = dataListAUC[index].ConfusionMatrix.TP
+      confusionMatrix.FP = dataListAUC[index].ConfusionMatrix.FP
+      confusionMatrix.TN = dataListAUC[index].ConfusionMatrix.TN
+      confusionMatrix.FN = dataListAUC[index].ConfusionMatrix.FN
+      console.log(threshold.value, item.ConfusionMatrix)
     }
   })
+  // dataListAUC.forEach((data, index) => {
+  //   if (threshold.value === data.threshold) {
+  //     confusionMatrix.TP = data.ConfusionMatrix.TP
+  //     confusionMatrix.FP = data.ConfusionMatrix.FP
+  //     confusionMatrix.TN = data.ConfusionMatrix.TN
+  //     confusionMatrix.FN = data.ConfusionMatrix.FN
+  //   }
+  // })
 }
 
 function updateChartLocale() {
@@ -229,7 +246,10 @@ function updateChartLocale() {
   chartAUC.update('none')
 }
 
-onMounted(chartCreate)
+onMounted(() => {
+  chartCreate()
+  updateChartLocale()
+})
 watch(sliderBarControl, () => {
   threshold.value = sliderBarControl.value
   chartUpdate()
@@ -291,7 +311,7 @@ watch(locale, updateChartLocale)
         </tbody>
       </table>
     </div>
-    <div>
+    <div class="text-black">
       <table class="bg-white">
         <tr>
           <th colspan="2">
@@ -318,47 +338,57 @@ watch(locale, updateChartLocale)
     </div>
   </div>
 
-  <div class="flex justify-center my-6">
-    <div class="text-black mr-6">
-      <table class="bg-white">
-        <tr>
-          <td class="p-5">
-            TP:{{ confusionMatrixROC.TP }}
-          </td>
-          <td class="p-5">
-            FN:{{ confusionMatrixROC.FN }}
-          </td>
-        </tr>
-        <tr>
-          <td class="p-5">
-            FP:{{ confusionMatrixROC.FP }}
-          </td>
-          <td class="p-5">
-            TN:{{ confusionMatrixROC.TN }}
-          </td>
-        </tr>
-        <th colspan="2">
-          <tr>{{ t('AUC-page.confusion-matrix-form.current-threshold') }} : {{ thresholdForAUCChart }}</tr>
-        </th>
-      </table>
-      <button class="btn" @click="previousThresholdID">
-        {{ t('AUC-page.confusion-matrix-form.previous-threshold') }}
-      </button><br>
-      <button class="btn" @click="nextThresholdID">
-        {{ t('AUC-page.confusion-matrix-form.next-threshold') }}
-      </button>
-      <table class="bg-white ">
-        <tr>
-          <td class="p-5">
-            {{ t('AUC-page.confusion-matrix-form.x-axis') }}({{ t('AUC-page.chart.FPR') }}) : {{ confusionMatrixROC.FPR }}
-          </td>
-        </tr>
-        <tr>
-          <td class="p-5">
-            {{ t('AUC-page.confusion-matrix-form.y-axis') }}({{ t('AUC-page.chart.TPR') }}) : {{ confusionMatrixROC.TPR }}
-          </td>
-        </tr>
-      </table>
+  <div class="flex justify-center">
+    <div class="text-black mr-12">
+      <div>
+        <table class="bg-white ma">
+          <tr>
+            <th colspan="2">
+              {{ t('AUC-page.confusion-matrix-form.current-threshold') }} : {{ thresholdForAUCChart }}
+            </th>
+          </tr>
+          <tr>
+            <td class="p-5">
+              TP:{{ confusionMatrixROC.TP }}
+            </td>
+            <td class="p-5">
+              FN:{{ confusionMatrixROC.FN }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p-5">
+              FP:{{ confusionMatrixROC.FP }}
+            </td>
+            <td class="p-5">
+              TN:{{ confusionMatrixROC.TN }}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="ma">
+        <button class="btn" @click="previousThresholdID">
+          {{ t('AUC-page.confusion-matrix-form.previous-threshold') }}
+        </button><br>
+        <button class="btn" @click="nextThresholdID">
+          {{ t('AUC-page.confusion-matrix-form.next-threshold') }}
+        </button>
+      </div>
+
+      <div>
+        <table class="bg-white ma">
+          <tr>
+            <td class="p-5">
+              {{ t('AUC-page.confusion-matrix-form.x-axis') }}({{ t('AUC-page.chart.FPR') }}) : {{ confusionMatrixROC.FPR }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p-5">
+              {{ t('AUC-page.confusion-matrix-form.y-axis') }}({{ t('AUC-page.chart.TPR') }}) : {{ confusionMatrixROC.TPR }}
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div class="bg-white h-500px w-1000px">
       <canvas id="chartAUC" />
