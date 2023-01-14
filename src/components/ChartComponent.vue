@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/antd.css'
+import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
+import 'vue-slider-component/dist-css/vue-slider-component.css'
+import 'vue-slider-component/theme/default.css'
 import Chart from 'chart.js/auto'
 import { onMounted, reactive, ref } from 'vue'
 import jsonObjConfusionMatrix from './dataConfusionMatrix.json'
@@ -331,7 +332,7 @@ watch(locale, updateChartLocale)
     </div>
   </div>
 
-  <div class="flex justify-center">
+  <div class="flex justify-center my-8">
     <div class="text-black mr-12">
       <div>
         <table class="bg-white ma">
