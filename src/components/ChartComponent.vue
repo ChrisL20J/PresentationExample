@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import Slider from '@vueform/slider'
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 import Chart from 'chart.js/auto'
 import { onMounted, reactive, ref } from 'vue'
 import jsonObjConfusionMatrix from './dataConfusionMatrix.json'
@@ -9,7 +10,7 @@ const { t, locale } = useI18n()
 const dataListConfusionMatrix = jsonObjConfusionMatrix
 const dataListAUC = jsonObjAUC
 
-const sliderBarControl = reactive({ value: 0, format: { decimals: 2 }, min: 0, max: 1, step: -1, lazy: false })
+const barOption = reactive({ value: 0, width: 700, height: 6, min: 0, max: 1, interval: 0.01, contained: true, tooltip: 'always' })
 const threshold = ref(0)
 const thresholdForAUCChart = ref(1)
 const thresholdID = ref(0)
@@ -242,8 +243,8 @@ onMounted(() => {
   chartCreate()
   updateChartLocale()
 })
-watch(sliderBarControl, () => {
-  threshold.value = sliderBarControl.value
+watch(barOption, () => {
+  threshold.value = barOption.value
   chartUpdate()
   checkCM()
 })
@@ -255,7 +256,7 @@ watch(locale, updateChartLocale)
     ROC & AUC
   </h2>
   <div class="my-6 mx-150">
-    <Slider v-model="sliderBarControl.value" :format="sliderBarControl.format" :min="sliderBarControl.min" :max="sliderBarControl.max" :step="sliderBarControl.step" :lazy="sliderBarControl.lazy" />
+    <VueSlider v-model="barOption.value" :width="barOption.width" :height="barOption.height" :min="barOption.min" :max="barOption.max" :interval="barOption.interval" :contained="barOption.contained" :tooltip="barOption.tooltip" />
   </div>
   <div class="flex justify-around">
     <div class="bg-white h-500px w-1000px">
@@ -396,5 +397,3 @@ td {
     border-collapse: separate;
 }
 </style>
-
-<style src="@vueform/slider/themes/default.css"></style>

@@ -17,13 +17,14 @@ watch(targetLocale, () => {
       <option value="en">
         English
       </option>
-      <option value="ja">
-        日本語
-      </option>
       <option value="zh-TW">
         中文
       </option>
+      <option value="ja">
+        日本語
+      </option>
     </select>
+
     <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
       <div i="carbon-sun dark:carbon-moon" />
     </button>
