@@ -230,8 +230,8 @@ function checkCM() {
 function updateChartLocale() {
   chartConfusionMatrix.data.datasets[0].label = t('AUC-page.chart.prediction')
   chartConfusionMatrix.data.datasets[1].label = t('AUC-page.chart.threshold')
-  chartConfusionMatrix.options.scales.y.title.text = t('AUC-page.confusion-matrix-form.data-point')
-  chartConfusionMatrix.options.scales.x.title.text = t('AUC-page.chart.threshold')
+  chartConfusionMatrix.options.scales.y.title.text = t('AUC-page.chart.threshold')
+  chartConfusionMatrix.options.scales.x.title.text = t('AUC-page.confusion-matrix-form.data-point')
   chartConfusionMatrix.update('none')
 
   chartAUC.data.datasets[0].label = t('AUC-page.chart.ROC')
@@ -256,9 +256,12 @@ watch(locale, updateChartLocale)
   <h2>
     ROC & AUC
   </h2>
-  <div class="my-6 mx-150">
-    <VueSlider v-model="barOption.value" :width="barOption.width" :height="barOption.height" :min="barOption.min" :max="barOption.max" :interval="barOption.interval" :contained="barOption.contained" :tooltip="barOption.tooltip" />
+  <div class="flex justify-around">
+    <div class="my-6">
+      <VueSlider v-model="barOption.value" :width="barOption.width" :height="barOption.height" :min="barOption.min" :max="barOption.max" :interval="barOption.interval" :contained="barOption.contained" :tooltip="barOption.tooltip" />
+    </div>
   </div>
+
   <div class="flex justify-around">
     <div class="bg-white h-500px w-1000px">
       <canvas id="chartConfusionMatrix" />
