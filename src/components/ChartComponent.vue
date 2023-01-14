@@ -223,14 +223,6 @@ function checkCM() {
       console.log(threshold.value, item.ConfusionMatrix)
     }
   })
-  // dataListAUC.forEach((data, index) => {
-  //   if (threshold.value === data.threshold) {
-  //     confusionMatrix.TP = data.ConfusionMatrix.TP
-  //     confusionMatrix.FP = data.ConfusionMatrix.FP
-  //     confusionMatrix.TN = data.ConfusionMatrix.TN
-  //     confusionMatrix.FN = data.ConfusionMatrix.FN
-  //   }
-  // })
 }
 
 function updateChartLocale() {

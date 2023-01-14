@@ -8,13 +8,9 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ChartComponent: typeof import('./components/ChartComponent.vue')['default']
-    ChartComponent1: typeof import('./components/ChartComponent1.vue')['default']
-    copy: typeof import('./components/ChartComponent copy.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Slider: typeof import('./components/Slider.vue')['default']
-    SliderBar: typeof import('./components/SliderBar.vue')['default']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
