@@ -21,15 +21,12 @@ watch(locale, introUpdate)
 </script>
 
 <template>
-  <main>
+  <main class="mt-30">
     <p>
-      <!-- A web-based showcase platform of some basic concept of Computer Science and AI. -->
       {{ introduction.S1 }}
       <br>
-      <!-- Planing to add more content in the future. -->
       {{ introduction.S2 }}
       <br>
-      <!-- Built from <a class="hover:bg-gray" href="https://github.com/antfu/vitesse" target="_blank">vitesse</a>, a template made by<a class="hover:bg-gray" href="https://github.com/antfu" target="_blank">antfu</a>. -->
       <span v-html="introduction.S3" />
     </p>
   </main>
