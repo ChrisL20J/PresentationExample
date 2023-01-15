@@ -5,7 +5,7 @@
 useHead({
   title: 'PresentationExample',
   meta: [
-    { name: 'description', content: 'Some examples of presentation' },
+    { name: 'description', content: 'A web-based showcase platform of some basic concept related to AI' },
     {
       name: 'theme-color',
       content: computed(() => isDark.value ? '#00aba9' : '#ffffff'),

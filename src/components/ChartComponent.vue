@@ -202,8 +202,8 @@ function nextThresholdID() {
       dataset.data.push({ x: dataListAUC[thresholdID.value].FPR, y: dataListAUC[thresholdID.value].TPR })
     })
     chartAUC.update('none')
-    console.log({ x: dataListAUC[thresholdID.value].FPR, y: dataListAUC[thresholdID.value].TPR })
-    console.log(chartAUC.data.datasets)
+    // console.log({ x: dataListAUC[thresholdID.value].FPR, y: dataListAUC[thresholdID.value].TPR })
+    // console.log(chartAUC.data.datasets)
   }
 }
 
@@ -214,7 +214,7 @@ function checkCM() {
       confusionMatrix.FP = dataListAUC[index - 1].ConfusionMatrix.FP
       confusionMatrix.TN = dataListAUC[index - 1].ConfusionMatrix.TN
       confusionMatrix.FN = dataListAUC[index - 1].ConfusionMatrix.FN
-      console.log(threshold.value, item.ConfusionMatrix)
+      // console.log(threshold.value, item.ConfusionMatrix)
       return true
     }
     else if (threshold.value <= 0.29) {
@@ -222,7 +222,7 @@ function checkCM() {
       confusionMatrix.FP = dataListAUC[index].ConfusionMatrix.FP
       confusionMatrix.TN = dataListAUC[index].ConfusionMatrix.TN
       confusionMatrix.FN = dataListAUC[index].ConfusionMatrix.FN
-      console.log(threshold.value, item.ConfusionMatrix)
+      // console.log(threshold.value, item.ConfusionMatrix)
     }
   })
 }

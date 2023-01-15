@@ -7,13 +7,9 @@ const introduction = reactive({ S1: '', S2: '', S3: '' })
 const introJson = jsonObj
 
 function introUpdate() {
-  introJson.forEach((item) => {
-    if (locale.value === item.lang) {
-      introduction.S1 = item.introduction[0]
-      introduction.S2 = item.introduction[1]
-      introduction.S3 = item.introduction[2]
-    }
-  })
+  introduction.S1 = introJson[locale.value].introduction[0]
+  introduction.S2 = introJson[locale.value].introduction[1]
+  introduction.S3 = introJson[locale.value].introduction[2]
 }
 
 onMounted(introUpdate)
