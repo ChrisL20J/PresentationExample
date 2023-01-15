@@ -85,7 +85,7 @@ export default defineConfig({
         md.use(Shiki, {
           theme: {
             light: 'vitesse-light',
-            dark: 'vitesse-dark',
+            dark: 'vitesse-light', // vitesse-dark
           },
         })
         md.use(LinkAttributes, {

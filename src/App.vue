@@ -8,7 +8,7 @@ useHead({
     { name: 'description', content: 'A web-based showcase platform of some basic concept related to AI' },
     {
       name: 'theme-color',
-      content: computed(() => isDark.value ? '#00aba9' : '#ffffff'),
+      content: computed(() => isDark.value ? '#ffffff' : '#ffffff'),
     },
   ],
   link: [
