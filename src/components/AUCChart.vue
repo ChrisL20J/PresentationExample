@@ -40,6 +40,7 @@ const labels = [
 const dataConfusionMatrix = {
   labels,
   datasets: [{
+    type: 'scatter',
     label: 'Prediction',
     backgroundColor: 'rgb(52, 103, 235)',
     borderColor: 'rgb(0, 0, 0)',
