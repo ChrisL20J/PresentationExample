@@ -11,6 +11,7 @@ AUC-page:
     ROC: ROC曲線
     TPR: 真陽性率
     FPR: 偽陽性率
+    probability: 機率
   confusion-matrix-form:
     data-point: 資料點
     label: 標籤

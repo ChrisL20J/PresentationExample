@@ -17,6 +17,7 @@ const thresholdForAUCChart = ref(1)
 const thresholdID = ref(0)
 const confusionMatrix = reactive({ TP: 5, FP: 10, TN: 0, FN: 0 })
 const confusionMatrixROC = reactive({ TP: 0, FP: 0, TN: 0, FN: 0, FPR: 0, TPR: 0 })
+const showText = ref(false)
 
 const labels = [
   'D1',
@@ -230,7 +231,7 @@ function checkCM() {
 function updateChartLocale() {
   chartConfusionMatrix.data.datasets[0].label = t('AUC-page.chart.prediction')
   chartConfusionMatrix.data.datasets[1].label = t('AUC-page.chart.threshold')
-  chartConfusionMatrix.options.scales.y.title.text = t('AUC-page.chart.threshold')
+  chartConfusionMatrix.options.scales.y.title.text = t('AUC-page.chart.probability')
   chartConfusionMatrix.options.scales.x.title.text = t('AUC-page.confusion-matrix-form.data-point')
   chartConfusionMatrix.update('none')
 
@@ -238,6 +239,11 @@ function updateChartLocale() {
   chartAUC.options.scales.y.title.text = t('AUC-page.chart.TPR')
   chartAUC.options.scales.xAxis.title.text = t('AUC-page.chart.FPR')
   chartAUC.update('none')
+}
+
+function checkIf1() {
+  if (barOption.value === 1)
+    showText.value = true
 }
 
 onMounted(() => {
@@ -248,6 +254,7 @@ watch(barOption, () => {
   threshold.value = barOption.value
   chartUpdate()
   checkCM()
+  checkIf1()
 })
 watch(locale, updateChartLocale)
 </script>
@@ -309,7 +316,7 @@ watch(locale, updateChartLocale)
       </table>
     </div>
     <div class="text-black">
-      <table class="bg-white">
+      <table class="bg-white ma">
         <tr>
           <th colspan="2">
             {{ t('AUC-page.confusion-matrix-form.confusion-matrix') }}

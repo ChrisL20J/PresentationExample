@@ -11,6 +11,7 @@ AUC-page:
     ROC: ROC curve
     TPR: True Positive Rate
     FPR: False Positive Rate
+    probability: probability
   confusion-matrix-form:
     data-point: Data
     label: Label
