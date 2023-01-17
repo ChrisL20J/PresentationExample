@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <AUCCchart />
+  <AUCChart />
 </template>
 
 <route lang="yaml">
