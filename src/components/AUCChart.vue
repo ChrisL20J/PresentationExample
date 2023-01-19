@@ -301,16 +301,16 @@ watch(locale, updateChartLocale)
               0
             </td>
             <td v-if="datas.label === 1 && threshold <= datas.probability">
-              TP
+              <span class="text-green-700">T</span><span class="text-green-700">P</span>
             </td>
             <td v-else-if="datas.label === 0 && threshold <= datas.probability">
-              FP
+              <span class="text-red">F</span><span class="text-green-700">P</span>
             </td>
             <td v-else-if="datas.label === 1 && threshold > datas.probability">
-              FN
+              <span class="text-red">F</span><span class="text-red">N</span>
             </td>
             <td v-else-if="datas.label === 0 && threshold > datas.probability">
-              TN
+              <span class="text-green-700">T</span><span class="text-red">N</span>
             </td>
           </tr>
         </tbody>
@@ -325,18 +325,18 @@ watch(locale, updateChartLocale)
         </tr>
         <tr>
           <td class="p-5">
-            TP:{{ confusionMatrix.TP }}
+            <span class="text-green-700">T</span><span class="text-green-700">P</span>:{{ confusionMatrix.TP }}
           </td>
           <td class="p-5">
-            FN:{{ confusionMatrix.FN }}
+            <span class="text-red">F</span><span class="text-red">N</span>:{{ confusionMatrix.FN }}
           </td>
         </tr>
         <tr>
           <td class="p-5">
-            FP:{{ confusionMatrix.FP }}
+            <span class="text-red">F</span><span class="text-green-700">P</span>:{{ confusionMatrix.FP }}
           </td>
           <td class="p-5">
-            TN:{{ confusionMatrix.TN }}
+            <span class="text-green-700">T</span><span class="text-red">N</span>:{{ confusionMatrix.TN }}
           </td>
         </tr>
       </table>

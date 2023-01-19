@@ -13,7 +13,7 @@ AUC-page:
     FPR: 偽陽性率
     probability: 機率
   confusion-matrix-form:
-    data-point: 資料點
+    data-point: 樣本
     label: 標籤
     result: 預測結果
     condition: 混淆矩陣分類
