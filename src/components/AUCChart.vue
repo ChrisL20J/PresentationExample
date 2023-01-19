@@ -12,7 +12,7 @@ const dataListConfusionMatrix = jsonObjConfusionMatrix
 const dataListAUC = jsonObjAUC
 
 const barOption = reactive({ value: 0, width: 700, height: 6, min: 0, max: 1, interval: 0.01, contained: true, tooltip: 'always' })
-const threshold = ref(0)
+const threshold = ref(1)
 const thresholdForAUCChart = ref(1)
 const thresholdID = ref(0)
 const confusionMatrix = reactive({ TP: 5, FP: 10, TN: 0, FN: 0 })
