@@ -11,7 +11,7 @@ const { t, locale } = useI18n()
 const dataListConfusionMatrix = jsonObjConfusionMatrix
 const dataListAUC = jsonObjAUC
 
-const barOption = reactive({ value: 0, width: 700, height: 6, min: 0, max: 1, interval: 0.01, contained: true, tooltip: 'always' })
+const barOption = reactive({ value: 1, width: 700, height: 6, min: 0, max: 1, interval: 0.01, contained: true, tooltip: 'always' })
 const threshold = ref(1)
 const thresholdForAUCChart = ref(1)
 const thresholdID = ref(0)
