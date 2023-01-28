@@ -28,9 +28,9 @@ watch(targetLocale, () => {
       <option value="zh-TW">
         中文
       </option>
-      <option value="ja">
+      <!-- <option value="ja">
         日本語
-      </option>
+      </option> -->
     </select>
   </nav>
 </template>
