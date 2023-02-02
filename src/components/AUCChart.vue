@@ -276,66 +276,82 @@ watch(locale, updateChartLocale)
     </div>
 
     <div class="bg-white text-black">
-      <table>
+      <table class="table-std">
         <tr>
-          <th colspan="5">
+          <th colspan="5" class="table-std">
             {{ t('AUC-page.chart.threshold') }}:<span class="text-red">{{ threshold }}</span>
           </th>
         </tr>
         <tbody>
           <tr>
-            <td>{{ t('AUC-page.confusion-matrix-form.data-point') }}</td>
-            <td>{{ t('AUC-page.confusion-matrix-form.label') }}</td>
-            <td>{{ t('AUC-page.chart.prediction') }}</td>
-            <td>{{ t('AUC-page.confusion-matrix-form.result') }}</td>
-            <td>{{ t('AUC-page.confusion-matrix-form.condition') }}</td>
+            <td class="table-std">
+              {{ t('AUC-page.confusion-matrix-form.data-point') }}
+            </td>
+            <td class="table-std">
+              {{ t('AUC-page.confusion-matrix-form.label') }}
+            </td>
+            <td class="table-std">
+              {{ t('AUC-page.chart.prediction') }}
+            </td>
+            <td class="table-std">
+              {{ t('AUC-page.confusion-matrix-form.result') }}
+            </td>
+            <td class="table-std">
+              {{ t('AUC-page.confusion-matrix-form.condition') }}
+            </td>
           </tr>
           <tr v-for="datas in dataListConfusionMatrix" :key="datas.dataPoint">
-            <td>{{ datas.dataPoint }}</td>
-            <td>{{ datas.label }}</td>
-            <td>{{ datas.probability }}</td>
-            <td v-if="threshold <= datas.probability" class="text-green-700">
+            <td class="table-std">
+              {{ datas.dataPoint }}
+            </td>
+            <td class="table-std">
+              {{ datas.label }}
+            </td>
+            <td class="table-std">
+              {{ datas.probability }}
+            </td>
+            <td v-if="threshold <= datas.probability" class="text-green-700 table-std">
               1
             </td>
-            <td v-else class="text-red">
+            <td v-else class="text-red table-std">
               0
             </td>
             <td v-if="datas.label === 1 && threshold <= datas.probability">
-              <span class="text-green-700">T</span><span class="text-green-700">P</span>
+              <span class="text-green-700 table-std">T</span><span class="text-green-700">P</span>
             </td>
             <td v-else-if="datas.label === 0 && threshold <= datas.probability">
-              <span class="text-red">F</span><span class="text-green-700">P</span>
+              <span class="text-red table-std">F</span><span class="text-green-700">P</span>
             </td>
             <td v-else-if="datas.label === 1 && threshold > datas.probability">
-              <span class="text-red">F</span><span class="text-red">N</span>
+              <span class="text-red table-std">F</span><span class="text-red">N</span>
             </td>
             <td v-else-if="datas.label === 0 && threshold > datas.probability">
-              <span class="text-green-700">T</span><span class="text-red">N</span>
+              <span class="text-green-700 table-std">T</span><span class="text-red">N</span>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="text-black">
-      <table class="bg-white ma">
+      <table class="bg-white ma table-std">
         <tr>
-          <th colspan="2">
+          <th colspan="2" class="table-std">
             {{ t('AUC-page.confusion-matrix-form.confusion-matrix') }}
           </th>
         </tr>
         <tr>
-          <td class="p-5">
+          <td class="p-5 table-std">
             <span class="text-green-700">T</span><span class="text-green-700">P</span>:{{ confusionMatrix.TP }}
           </td>
-          <td class="p-5">
+          <td class="p-5 table-std">
             <span class="text-red">F</span><span class="text-red">N</span>:{{ confusionMatrix.FN }}
           </td>
         </tr>
         <tr>
-          <td class="p-5">
+          <td class="p-5 table-std">
             <span class="text-red">F</span><span class="text-green-700">P</span>:{{ confusionMatrix.FP }}
           </td>
-          <td class="p-5">
+          <td class="p-5 table-std">
             <span class="text-green-700">T</span><span class="text-red">N</span>:{{ confusionMatrix.TN }}
           </td>
         </tr>
@@ -346,25 +362,25 @@ watch(locale, updateChartLocale)
   <div class="flex justify-center my-8">
     <div class="text-black mr-12">
       <div>
-        <table class="bg-white ma">
+        <table class="bg-white ma table-std">
           <tr>
-            <th colspan="2">
+            <th colspan="2" class="p-2 table-std">
               {{ t('AUC-page.confusion-matrix-form.current-threshold') }} : {{ thresholdForAUCChart }}
             </th>
           </tr>
           <tr>
-            <td class="p-5">
+            <td class="p-5 table-std">
               TP:{{ confusionMatrixROC.TP }}
             </td>
-            <td class="p-5">
+            <td class="p-5 table-std">
               FN:{{ confusionMatrixROC.FN }}
             </td>
           </tr>
           <tr>
-            <td class="p-5">
+            <td class="p-5 table-std">
               FP:{{ confusionMatrixROC.FP }}
             </td>
-            <td class="p-5">
+            <td class="p-5 table-std">
               TN:{{ confusionMatrixROC.TN }}
             </td>
           </tr>
@@ -381,14 +397,14 @@ watch(locale, updateChartLocale)
       </div>
 
       <div>
-        <table class="bg-white ma">
-          <tr>
-            <td class="p-5">
+        <table class="bg-white ma table-std">
+          <tr table-std>
+            <td class="p-5 table-std">
               {{ t('AUC-page.confusion-matrix-form.x-axis') }}({{ t('AUC-page.chart.FPR') }}) : {{ confusionMatrixROC.FPR }}
             </td>
           </tr>
-          <tr>
-            <td class="p-5">
+          <tr table-std>
+            <td class="p-5 table-std">
               {{ t('AUC-page.confusion-matrix-form.y-axis') }}({{ t('AUC-page.chart.TPR') }}) : {{ confusionMatrixROC.TPR }}
             </td>
           </tr>
@@ -401,12 +417,3 @@ watch(locale, updateChartLocale)
   </div>
 </template>
 
-<style>
-table,
-thead,
-th,
-td {
-    border: 1px solid #333;
-    border-collapse: separate;
-}
-</style>
