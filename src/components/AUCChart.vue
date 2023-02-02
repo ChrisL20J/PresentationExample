@@ -316,17 +316,17 @@ watch(locale, updateChartLocale)
             <td v-else class="text-red table-std">
               0
             </td>
-            <td v-if="datas.label === 1 && threshold <= datas.probability">
-              <span class="text-green-700 table-std">T</span><span class="text-green-700">P</span>
+            <td v-if="datas.label === 1 && threshold <= datas.probability" class="table-std">
+              <span class="text-green-700">T</span><span class="text-green-700">P</span>
             </td>
-            <td v-else-if="datas.label === 0 && threshold <= datas.probability">
-              <span class="text-red table-std">F</span><span class="text-green-700">P</span>
+            <td v-else-if="datas.label === 0 && threshold <= datas.probability" class="table-std">
+              <span class="text-red">F</span><span class="text-green-700">P</span>
             </td>
-            <td v-else-if="datas.label === 1 && threshold > datas.probability">
-              <span class="text-red table-std">F</span><span class="text-red">N</span>
+            <td v-else-if="datas.label === 1 && threshold > datas.probability" class="table-std">
+              <span class="text-red">F</span><span class="text-red">N</span>
             </td>
-            <td v-else-if="datas.label === 0 && threshold > datas.probability">
-              <span class="text-green-700 table-std">T</span><span class="text-red">N</span>
+            <td v-else-if="datas.label === 0 && threshold > datas.probability" class="table-std">
+              <span class="text-green-700">T</span><span class="text-red">N</span>
             </td>
           </tr>
         </tbody>
