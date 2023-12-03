@@ -1,4 +1,5 @@
 {
+  "editor.inlayHints.enabled": false,
   "cSpell.words": ["Vitesse", "Vite", "unocss", "vitest", "vueuse", "pinia", "demi", "antfu", "iconify", "intlify", "vitejs", "unplugin", "pnpm"],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested",
@@ -11,5 +12,6 @@
   "files.associations": {
     "*.css": "postcss"
   },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "oxcYamlHelper.rulesetDocumentationSettings": 0
 }
